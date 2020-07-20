@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="has-header">
+
+
+
+    <ion-list-header color="light">Analytics</ion-list-header>
+
+    <ion-item>
+        <ion-label>Choose Country</ion-label>
+        <ion-select [(ngModel)]="countrySelected" (ionChange)='chooseCountry()'>
+            <ion-select-option *ngFor="let country of listOfCountries" value="{{country.alpha2code}}">{{country.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+
+    <ion-card class="welcome-card">
+        <ion-card-header>
+            <ion-card-subtitle>Cases overview</ion-card-subtitle>
+            <ion-card-title>{{ countrySelected ? getCountryName(countrySelected) : "World" }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-button color="dark">Confirmed</ion-button>
+                        <ion-button color="light">{{ currentData.confirmed }}</ion-button>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-button color="dark">Recovered</ion-button>
+                        <ion-button color="light">{{ currentData.recovered }}</ion-button>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button color="dark">Critical</ion-button>
+                        <ion-button color="light">{{ currentData.critical }}</ion-button>
+                    </ion-col>
+
+                    <ion-col>
+                        <ion-button color="dark">Deaths</ion-button>
+                        <ion-button color="light">{{ currentData.deaths }}</ion-button>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-card class="welcome-card">
+        <ion-card-header>
+            <ion-card-subtitle>Daily change</ion-card-subtitle>
+            <ion-card-title>{{ countrySelected ? getCountryName(countrySelected) : "World" }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <canvas #hrzLineChart></canvas>
+        </ion-card-content>
+    </ion-card>
+
+
+
+</ion-content>
